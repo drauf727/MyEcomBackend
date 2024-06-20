@@ -25,6 +25,7 @@ router.get('/:id', async (req, res) => {
     });
     if (!singleProduct) {
       res.status(404).json({ message: 'No product found with that ID'});
+      return;
     }
     res.status(200).json(singleProduct);
   } catch (err) {
@@ -114,7 +115,7 @@ router.delete('/:id', (req, res) => {
   Product.destroy({
     where: {
       id: req.params.id,
-    };
+    },
   })
   .then((deletedProduct) => {
     res.json(deletedProduct);
